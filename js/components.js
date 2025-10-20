@@ -1,61 +1,67 @@
 // Set favicon with theme background using canvas
 function setFaviconWithBg() {
-    // Remove any existing favicon links
-    document.querySelectorAll("link[rel='icon'], link[rel='shortcut icon']").forEach(el => el.remove());
+  // Remove any existing favicon links
+  document
+    .querySelectorAll("link[rel='icon'], link[rel='shortcut icon']")
+    .forEach((el) => el.remove());
 
-    // Helper to create favicon with background
-    function createFavicon(src, size, bgColor) {
-        const canvas = document.createElement('canvas');
-        canvas.width = size;
-        canvas.height = size;
-        const ctx = canvas.getContext('2d');
-        // Draw circular background
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(size/2, size/2, size/2, 0, 2 * Math.PI);
-        ctx.closePath();
-        ctx.fillStyle = bgColor;
-        ctx.fill();
-        ctx.restore();
-        // Draw image (centered, clipped to circle)
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(size/2, size/2, size/2 * 0.85, 0, 2 * Math.PI);
-        ctx.closePath();
-        ctx.clip();
-        const img = new window.Image();
-        img.src = src;
-        img.onload = function() {
-            ctx.drawImage(img, 0, 0, size, size);
-            ctx.restore();
-            const link = document.createElement('link');
-            link.rel = 'icon';
-            link.type = 'image/png';
-            link.sizes = `${size}x${size}`;
-            link.href = canvas.toDataURL('image/png');
-            document.head.appendChild(link);
-        };
-    }
+  // Helper to create favicon with background (matches navbar/footer logo style)
+  function createFavicon(src, size, bgColor) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    // Draw circular background
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.fillStyle = bgColor;
+    ctx.fill();
+    // Subtle gray border like the navbar logo container
+    ctx.strokeStyle = "#e5e7eb"; // gray-200
+    ctx.lineWidth = Math.max(1, Math.round(size * 0.06)); // ~1px at 16, ~2px at 32
+    ctx.stroke();
+    ctx.restore();
+    // Draw image (centered, clipped to circle)
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, (size / 2) * 0.85, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.clip();
+    const img = new window.Image();
+    img.src = src;
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0, size, size);
+      ctx.restore();
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.type = "image/png";
+      link.sizes = `${size}x${size}`;
+      link.href = canvas.toDataURL("image/png");
+      document.head.appendChild(link);
+    };
+  }
 
-    // Use theme color for background
-    const themeColor = '#e11d48'; // rose-500
-    createFavicon('images/logo/favicon-16x16.png', 16, themeColor);
-    createFavicon('images/logo/favicon-32x32.png', 32, themeColor);
+  // Use white background to match the simplified logo design
+  const themeColor = "#ffffff"; // white
+  createFavicon("images/logo/favicon-16x16.png", 16, themeColor);
+  createFavicon("images/logo/favicon-32x32.png", 32, themeColor);
 
-    // Set theme color for browser UI
-    let themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (!themeMeta) {
-        themeMeta = document.createElement('meta');
-        themeMeta.name = 'theme-color';
-        document.head.appendChild(themeMeta);
-    }
-    themeMeta.content = themeColor;
+  // Set theme color for browser UI
+  let themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (!themeMeta) {
+    themeMeta = document.createElement("meta");
+    themeMeta.name = "theme-color";
+    document.head.appendChild(themeMeta);
+  }
+  themeMeta.content = themeColor;
 }
 
-document.addEventListener('DOMContentLoaded', setFaviconWithBg);
+document.addEventListener("DOMContentLoaded", setFaviconWithBg);
 // Navigation Component (keeping as is)
 const NavigationComponent = {
-    template: `
+  template: `
     <nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -110,58 +116,60 @@ const NavigationComponent = {
             </div>
         </div>
     </nav>`,
-    
-    init: function(activePage = 'home') {
-        // Set active page styling for desktop
-        setTimeout(() => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                if (link.dataset.page === activePage) {
-                    link.className = 'text-primary-600 border-b-2 border-primary-600 font-medium transition-colors';
-                } else {
-                    link.className = 'text-gray-700 hover:text-primary-600 font-medium transition-colors';
-                }
-            });
-            // Set active page styling for mobile
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-            mobileNavLinks.forEach(link => {
-                if (link.dataset.page === activePage) {
-                    link.className = 'block py-2 text-primary-600 font-medium';
-                } else {
-                    link.className = 'block py-2 text-gray-700 hover:text-primary-600';
-                }
-            });
-        }, 0);
 
-        // Mobile menu functionality
-        setTimeout(() => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+  init: function (activePage = "home") {
+    // Set active page styling for desktop
+    setTimeout(() => {
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        if (link.dataset.page === activePage) {
+          link.className =
+            "text-primary-600 border-b-2 border-primary-600 font-medium transition-colors";
+        } else {
+          link.className =
+            "text-gray-700 hover:text-primary-600 font-medium transition-colors";
+        }
+      });
+      // Set active page styling for mobile
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+      mobileNavLinks.forEach((link) => {
+        if (link.dataset.page === activePage) {
+          link.className = "block py-2 text-primary-600 font-medium";
+        } else {
+          link.className = "block py-2 text-gray-700 hover:text-primary-600";
+        }
+      });
+    }, 0);
 
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-        }, 0);
+    // Mobile menu functionality
+    setTimeout(() => {
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
 
-        // Navbar background change on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-white/98');
-                navbar.classList.remove('bg-white/95');
-            } else {
-                navbar.classList.add('bg-white/95');
-                navbar.classList.remove('bg-white/98');
-            }
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
         });
-    }
+      }
+    }, 0);
+
+    // Navbar background change on scroll
+    window.addEventListener("scroll", () => {
+      const navbar = document.querySelector("nav");
+      if (window.scrollY > 50) {
+        navbar.classList.add("bg-white/98");
+        navbar.classList.remove("bg-white/95");
+      } else {
+        navbar.classList.add("bg-white/95");
+        navbar.classList.remove("bg-white/98");
+      }
+    });
+  },
 };
 
 // Updated Footer Component to match navbar logo
 const FooterComponent = {
-    template: `
+  template: `
     <footer class="text-white py-16" style="background-color: #c2185b;">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
@@ -217,75 +225,75 @@ const FooterComponent = {
             
         </div>
     </footer>`,
-    
-    init: function() {
-        // Add any footer-specific functionality here if needed
-    }
+
+  init: function () {
+    // Add any footer-specific functionality here if needed
+  },
 };
 
 // Rest of your component loader code stays the same...
 function loadComponent(componentName, containerId, options = {}) {
-    const container = document.getElementById(containerId);
-    if (!container) {
-        console.error(`Container with id '${containerId}' not found`);
-        return;
-    }
-    
-    let component;
-    switch (componentName) {
-        case 'navigation':
-            component = NavigationComponent;
-            break;
-        case 'footer':
-            component = FooterComponent;
-            break;
-        default:
-            console.error(`Component '${componentName}' not found`);
-            return;
-    }
-    
-    container.innerHTML = component.template;
-    if (component.init) {
-        component.init(options.activePage);
-    }
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.error(`Container with id '${containerId}' not found`);
+    return;
+  }
+
+  let component;
+  switch (componentName) {
+    case "navigation":
+      component = NavigationComponent;
+      break;
+    case "footer":
+      component = FooterComponent;
+      break;
+    default:
+      console.error(`Component '${componentName}' not found`);
+      return;
+  }
+
+  container.innerHTML = component.template;
+  if (component.init) {
+    component.init(options.activePage);
+  }
 }
 
 // Auto-load components on DOM ready
-document.addEventListener('DOMContentLoaded', function() {
-    // Load navigation if container exists
-    if (document.getElementById('navigation-container')) {
-        const activePage = document.body.dataset.page || 'home';
-        loadComponent('navigation', 'navigation-container', { activePage });
-    }
-    
-    // Load footer if container exists
-    if (document.getElementById('footer-container')) {
-        loadComponent('footer', 'footer-container');
-    }
-    
-    // Add smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+document.addEventListener("DOMContentLoaded", function () {
+  // Load navigation if container exists
+  if (document.getElementById("navigation-container")) {
+    const activePage = document.body.dataset.page || "home";
+    loadComponent("navigation", "navigation-container", { activePage });
+  }
+
+  // Load footer if container exists
+  if (document.getElementById("footer-container")) {
+    loadComponent("footer", "footer-container");
+  }
+
+  // Add smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
+      }
     });
-    
-    // Gallery hover effects
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
+  });
+
+  // Gallery hover effects
+  const galleryItems = document.querySelectorAll(".gallery-item");
+  galleryItems.forEach((item) => {
+    item.addEventListener("mouseenter", function () {
+      this.style.transform = "scale(1.05)";
     });
+
+    item.addEventListener("mouseleave", function () {
+      this.style.transform = "scale(1)";
+    });
+  });
 });
