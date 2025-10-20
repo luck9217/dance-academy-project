@@ -400,7 +400,12 @@
           ];
 
           // Videos that might have embedding restrictions
-          const restrictedVideos = ['PKvpcq-MiC4', 'nWgf25MU8nY', 'c9m3zCeXGqI', 'XyWwsphMfTM']; // Add video IDs that commonly have embed restrictions
+          const restrictedVideos = [
+            "PKvpcq-MiC4",
+            "nWgf25MU8nY",
+            "c9m3zCeXGqI",
+            "XyWwsphMfTM",
+          ]; // Add video IDs that commonly have embed restrictions
 
           // Helper for tag color
           function getTagColor(tag) {
@@ -509,9 +514,14 @@
 
     <!-- Video Modal (video-only) -->
     <div id="video-modal" class="fixed inset-0 z-50 hidden">
-      <div class="modal-backdrop absolute inset-0" onclick="closeVideoModal()"></div>
+      <div
+        class="modal-backdrop absolute inset-0"
+        onclick="closeVideoModal()"
+      ></div>
       <div class="flex items-center justify-center min-h-screen p-4">
-        <div class="w-[90vw] max-w-5xl aspect-video bg-black rounded-2xl shadow-2xl overflow-hidden animate-scaleIn relative">
+        <div
+          class="w-[90vw] max-w-5xl aspect-video bg-black rounded-2xl shadow-2xl overflow-hidden animate-scaleIn relative"
+        >
           <!-- Close button -->
           <button
             onclick="closeVideoModal()"
@@ -554,7 +564,10 @@
             rel="noopener noreferrer"
             class="bg-white text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center"
           >
-            <i class="fab fa-youtube mr-3 text-red-600 text-xl" aria-hidden="true"></i>
+            <i
+              class="fab fa-youtube mr-3 text-red-600 text-xl"
+              aria-hidden="true"
+            ></i>
             Subscribe
             <i class="fas fa-bell ml-2 text-yellow-500" aria-hidden="true"></i>
           </a>
@@ -571,23 +584,52 @@
 
         <!-- Social Stats -->
         <div class="flex flex-wrap justify-center gap-6 mt-12">
-          <div class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1">
-            <div class="text-2xl font-bold text-white mb-1 tracking-tight">81K+</div>
-            <div class="text-white/80 text-sm font-medium tracking-wide">Video Views</div>
+          <div
+            class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1"
+          >
+            <div class="text-2xl font-bold text-white mb-1 tracking-tight">
+              81K+
+            </div>
+            <div class="text-white/80 text-sm font-medium tracking-wide">
+              Video Views
+            </div>
           </div>
-          <div class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1">
-            <div class="text-2xl font-bold text-white mb-1 tracking-tight">100+</div>
-            <div class="text-white/80 text-sm font-medium tracking-wide">Original Performances</div>
+          <div
+            class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1"
+          >
+            <div class="text-2xl font-bold text-white mb-1 tracking-tight">
+              100+
+            </div>
+            <div class="text-white/80 text-sm font-medium tracking-wide">
+              Original Performances
+            </div>
           </div>
-          <div class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1">
-            <div class="text-2xl font-bold text-white mb-1 tracking-tight">3.2K+</div>
-            <div class="text-white/80 text-sm font-medium tracking-wide">Facebook Followers</div>
+          <div
+            class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1"
+          >
+            <div class="text-2xl font-bold text-white mb-1 tracking-tight">
+              3.2K+
+            </div>
+            <div class="text-white/80 text-sm font-medium tracking-wide">
+              Facebook Followers
+            </div>
           </div>
-          <a href="https://www.youtube.com/c/RasikaDanceAcademy" target="_blank" rel="noopener noreferrer" class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1 cursor-pointer group">
-            <div class="text-2xl font-bold text-white mb-1 tracking-tight flex items-center justify-center group-hover:scale-110 transition-transform">
+          <a
+            href="https://www.youtube.com/c/RasikaDanceAcademy"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-7 py-4 rounded-2xl glass-effect border border-white/30 shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col items-center min-w-[140px] max-w-[200px] flex-1 cursor-pointer group"
+          >
+            <div
+              class="text-2xl font-bold text-white mb-1 tracking-tight flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
               <i class="fab fa-youtube mr-1"></i>1K+
             </div>
-            <div class="text-white/80 text-sm font-medium tracking-wide group-hover:text-white transition-colors">Subscribers</div>
+            <div
+              class="text-white/80 text-sm font-medium tracking-wide group-hover:text-white transition-colors"
+            >
+              Subscribers
+            </div>
           </a>
         </div>
       </div>
@@ -604,7 +646,7 @@
         // Check if this video is known to be restricted
         if (restrictedVideos.includes(videoId)) {
           // Open directly on YouTube for restricted videos
-          window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+          window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
           return;
         }
 
@@ -617,12 +659,12 @@
         // Add timeout to detect if video can't be embedded
         let embedTimeout = setTimeout(() => {
           // If iframe hasn't loaded properly, open in YouTube instead
-          window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+          window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
           closeVideoModal();
         }, 5000);
 
         // Handle iframe load success
-        iframe.onload = function() {
+        iframe.onload = function () {
           clearTimeout(embedTimeout);
         };
 
